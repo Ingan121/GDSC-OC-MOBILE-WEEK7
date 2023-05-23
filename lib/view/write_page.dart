@@ -24,6 +24,7 @@ class _WritePageState extends State<WritePage> {
     "여유로운",
     "귀찮이즘",
   ];
+  List<bool> selected = List.filled(12, false);
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +91,51 @@ class _WritePageState extends State<WritePage> {
           ),
           const SizedBox(height: 24),
           // TODO GridView.builder를 활용해 보세요.
+          GridView.builder(
+            primary: false,
+            shrinkWrap: true,
+            itemCount: keywords.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3, // 하나의 행에 보여 줄 아이템의 개수
+              childAspectRatio: 103 / 64, // 아이템의 가로, 세로 비율
+              mainAxisSpacing: 9, // 수평 빈 공간
+              crossAxisSpacing: 8, // 수직 빈 공간
+            ),
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${keywords[index]}",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: W900,
+                          color: Color(0xFF313131),
+                        ),
+                      ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: selected[index]
+                            ? Color(0xFF313131)
+                            : Color(0xFFECECEC),
+                        width: 1),
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color(0xFFFFFFFF),
+                  ),
+                ),
+                onTap: () {
+                  setState(() {
+                    selected[index] = !selected[index];
+                  });
+                },
+              );
+            },
+          ),
         ],
       ),
       floatingActionButton: Container(
@@ -97,6 +143,7 @@ class _WritePageState extends State<WritePage> {
         child: RoundedButton(
           onTap: () {
             // TODO Navigator를 이용해 뒤로 가는 법을 활용해 보세요.
+            Navigator.pop(context);
           },
           text: "작성 완료",
         ),

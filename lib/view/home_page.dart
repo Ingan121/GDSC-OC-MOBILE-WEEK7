@@ -4,6 +4,8 @@ import 'package:week7/component/keyword_box.dart';
 import 'package:week7/component/rounded_button.dart';
 import 'package:week7/view/write_page.dart';
 
+import 'image_page.dart';
+
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
@@ -63,6 +65,21 @@ class HomePage extends StatelessWidget {
                 KeywordBox(
                   keyword: "우유부단",
                 ),
+                KeywordBox(
+                  keyword: "밈중독자",
+                ),
+                KeywordBox(
+                  keyword: "담담함",
+                ),
+                KeywordBox(
+                  keyword: "조용한 또라이",
+                ),
+                KeywordBox(
+                  keyword: "장난꾸러기",
+                ),
+                KeywordBox(
+                  keyword: "잔잔한 타입",
+                ),
               ],
             ),
             const SizedBox(
@@ -91,7 +108,28 @@ class HomePage extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 // TODO 이미지를 화면에 보여 주세요.
-                return const SizedBox.shrink();
+                return GestureDetector(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Image.asset(
+                        "assets/images/${images[index]}",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ImagePage(
+                          imageUrl: images[index],
+                        ),
+                      ),
+                    );
+                  },
+                );
               },
             ),
           ],
