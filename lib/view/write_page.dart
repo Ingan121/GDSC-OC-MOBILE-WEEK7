@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:week7/common/const/text.dart';
+import 'package:week7/component/keyword_select_box.dart';
 import 'package:week7/component/rounded_button.dart';
 
 class WritePage extends StatefulWidget {
@@ -103,30 +104,10 @@ class _WritePageState extends State<WritePage> {
             ),
             itemBuilder: (context, index) {
               return GestureDetector(
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "${keywords[index]}",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: W900,
-                          color: Color(0xFF313131),
-                        ),
-                      ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: selected[index]
-                            ? Color(0xFF313131)
-                            : Color(0xFFECECEC),
-                        width: 1),
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xFFFFFFFF),
-                  ),
+                child: KeywordSelectBox(
+                  keywords: keywords,
+                  selected: selected,
+                  index: index,
                 ),
                 onTap: () {
                   setState(() {
